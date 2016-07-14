@@ -120,17 +120,25 @@ class ContactManager():
         ip = input("Please Enter Your Choice")
         if ip == '1':
             name = input('Name:')
-            phone_no = input('Phone:')
+            while True:
+                try:
+
+                    phone_no = int(input('Phone:'))
+                    break
+                except ValueError:
+                    print("please Enter a valid mobile Number")
+            phone_no = str(phone_no)
             email = input('Email:')
             street = input('Street:')
             city = input('City:')
             state = input('State:')
+
             pin_code = input('Pin_code:')
             values = {}
             values = {"name": name, "phone_no": phone_no, "email": email, "street": street, "city": city,
              "state": state, "pin_code": pin_code}
 
-            if phone_no not in data.keys() and len(phone_no) == 10 and phone_no[0] != '0' and phone_no.isnumeric():
+            if phone_no not in data.keys():
                 contact = Contact(values)
                 c.add_person(contact)
         elif ip == '2':
