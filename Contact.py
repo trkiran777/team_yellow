@@ -7,15 +7,13 @@ class Address(object):
         self.state = values["state"]
         self.pin_code = values["pin_code"]
 class Contact():
-    def __init__(self,values= {} ):
+    def __init__(self,values ):
+
 
         self.name=values["name"]
         self.phone_no=values["phone_no"]
         self.email=values["email"]
-        self.street = values["street"]
-        self.city = values["city"]
-        self.state = values["state"]
-        self.pin_code = values["pin_code"]
+
 
         self.address = Address(values)
 
@@ -36,6 +34,7 @@ Reliance mobile numbers starts with 9300,9852
 
     #add a new person
     def add_person(self,contact):
+
 
         self.data[contact.phone_no]  = contact
      #   self.data[contact.phone_no] =
@@ -69,8 +68,10 @@ Reliance mobile numbers starts with 9300,9852
         provider = {'Airtel': ['9900', '9800', '9811'], 'BSNL': ['9440', '9822'], 'Idea': ['9848', '9912'],
                     'Reliance': ['9300', '9812']}
         lis = []
+        lis2 = []
         for key,values in self.data.items():
             lis.append(key)
+            lis2.append(values)
         print(lis)
 
         for item in lis:
@@ -78,19 +79,24 @@ Reliance mobile numbers starts with 9300,9852
                 try:
                     a = lis.index(item)
                     del lis[a]
+                    del lis2[a]
                 except:
                     print("Err....")
         print(lis)
-        return lis
+        return lis2
     def get_record_contains_string(self,sr,field):
         lis = []
+        dictt = {}
+        for key, values in self.data.items():
+            dictt[key] = (values.__dict__)
+            dictt[key]["address"] = dictt[key]["address"].__dict__
+            if field in dictt[key]:
+                if sr in dictt[key][field]:
+                    lis.append(values)
+            if field in dictt[key]["address"]:
+                if sr in dictt[key]["address"][field]:
+                    lis.append(values)
 
-        for key , values in self.data.items():
-
-            d = values.__dict__
-
-            if sr in d[field]:
-                lis.append(values)
         return lis
 
 
@@ -99,7 +105,7 @@ import json
 
 class ContactManager():
     data = {}
-    with open('data.txt') as data_file:
+    with open('data.json') as data_file:
         data1 = json.load(data_file)
     lis = []
     for key , values in data1.items():
@@ -156,7 +162,10 @@ class ContactManager():
             if provider_name in provider.keys():
                 records = c.get_records_of_provider(provider_name)
                 for key in records:
-                    print(data[key].name,data[key].email,data[key].phone_no,data[key].street,data[key].city)
+                    key = key.__dict__
+                    key["address"] = key["address"].__dict__
+                    print(key)
+
         elif ip == '7':
             fields = ['name', 'phone_no', 'email', 'street', 'city', 'state', 'pin_code']
             st = input('Enter a string:')
@@ -164,8 +173,7 @@ class ContactManager():
             if field in fields:
                 li = c.get_record_contains_string(st,field)
                 for item in li:
-                    print(item.name, item.phone_no, item.email, item.address.street, item.address.city,
-                          item.address.state, item.address.pin_code)
+                    print(item.__dict__)
         elif ip == '8':
                 break
         else:
@@ -175,8 +183,9 @@ class ContactManager():
     dict1 = {}
     for key, values in data.items():
         dictt[key] = (values.__dict__)
-        dictt[key] = dictt[key]["address"].__dict__
+        dictt[key]["address"] = dictt[key]["address"].__dict__
 
+    print(dictt)
     with open('final.json', 'w') as outfile:
         json.dump(dictt, outfile)
     print("Data successfully written in file")
