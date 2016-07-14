@@ -109,7 +109,7 @@ class main(object):
             if val==2:
                 print("enter mobile number to edit:")
                 _num=input()
-                if _num not in self.data:
+                if _num not in contacts.data:
                     print("number not exist")
                 else:
                     print("enter data to edit:")
