@@ -27,7 +27,7 @@ class ContactOperation():
 Airtel mobile numbers starts with 9900, 9800, 9811
 BSNL mobile numbers starts with 9440, 9822
 Idea mobile numbers starts with 9848, 9912
-Reliance mobile numbers starts with 9300,
+Reliance mobile numbers starts with 9300,9852
 
     '''
     global provider
