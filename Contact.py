@@ -71,6 +71,7 @@ Reliance mobile numbers starts with 9300,9852
         lis = []
         for key,values in self.data.items():
             lis.append(key)
+        print(lis)
 
         for item in lis:
             if item[0:4] not in provider[provider_name]:
@@ -79,7 +80,7 @@ Reliance mobile numbers starts with 9300,9852
                     del lis[a]
                 except:
                     print("Err....")
-
+        print(lis)
         return lis
     def get_record_contains_string(self,sr,field):
         lis = []
@@ -87,6 +88,7 @@ Reliance mobile numbers starts with 9300,9852
         for key , values in self.data.items():
 
             d = values.__dict__
+
             if sr in d[field]:
                 lis.append(values)
         return lis
@@ -147,9 +149,8 @@ class ContactManager():
                                                                     pin_code=details.address.pin_code))
         elif ip == '5':
             phone_no = input('Phone_no:')
-            if phone_no in c.data.keys():
-                provider_name = c.get_provider(phone_no)
-                print(provider_name)
+            provider_name = c.get_provider(phone_no)
+            print(provider_name)
         elif ip == '6':
             provider_name = input('Provider name:')
             if provider_name in provider.keys():
@@ -175,7 +176,7 @@ class ContactManager():
     for key, values in data.items():
         dictt[key] = (values.__dict__)
         dictt[key] = dictt[key]["address"].__dict__
-    print(dictt)
+
     with open('final.json', 'w') as outfile:
         json.dump(dictt, outfile)
     print("Data successfully written in file")
