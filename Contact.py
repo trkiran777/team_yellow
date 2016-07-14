@@ -2,10 +2,10 @@
 class Address(object):
 
     def __init__(self,values):
-        self.street = values["street"]
-        self.city = values["city"]
-        self.state = values["state"]
-        self.pin_code = values["pin_code"]
+        self.street = values["address"]["street"]
+        self.city = values["address"]["city"]
+        self.state = values["address"]["state"]
+        self.pin_code = values["address"]["pin_code"]
 class Contact():
     def __init__(self,values ):
 
@@ -135,8 +135,8 @@ class ContactManager():
 
             pin_code = input('Pin_code:')
             values = {}
-            values = {"name": name, "phone_no": phone_no, "email": email, "street": street, "city": city,
-             "state": state, "pin_code": pin_code}
+            values = {"name": name, "phone_no": phone_no, "email": email,"address":{ "street": street, "city": city,
+             "state": state, "pin_code": pin_code}}
 
             if phone_no not in data.keys():
                 contact = Contact(values)
@@ -193,9 +193,9 @@ class ContactManager():
         dictt[key] = (values.__dict__)
         dictt[key]["address"] = dictt[key]["address"].__dict__
 
-    print(dictt)
-    with open('final.json', 'w') as outfile:
-        json.dump(dictt, outfile)
+
+    with open('data.json', 'w') as outfile:
+        json.dump(dictt, outfile,indent=2)
     print("Data successfully written in file")
 
 
