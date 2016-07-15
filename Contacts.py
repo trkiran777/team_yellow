@@ -1,5 +1,5 @@
 import json
- 
+
 
 class Address:
     def __init__(self, street, city, state, pin_code):
@@ -7,8 +7,8 @@ class Address:
         self.city = city
         self.state = state
         self.pin_code = pin_code
- 
- 
+
+
 class Contact:
     def __init__(self, name, phone_no, email, street, city, state, pin_code):
         self.name = name
@@ -27,8 +27,8 @@ class ContactDetails:
     STATE = 'state'
     PIN_CODE = 'pin_code'
 
- 
-class Provider:
+
+class Provider():
     def __init__(self):
         self.Airtel = ['9900', '9800', '9811']
         self.BSNL = ['9440', '9822']
@@ -36,26 +36,33 @@ class Provider:
         self.Reliance = ['9300', '9812']
         self.provider_name = ""
 
-
-class ProviderManager:
+class ProviderManager():
     def __init__(self):
         self.provider = Provider()
-
     def set_provider_name(self, phone_no):
         if phone_no in self.provider.Airtel:
+
             self.provider.provider_name = "Airtel"
         elif phone_no in self.provider.BSNL:
             self.provider.provider_name = "BSNL"
+
         elif phone_no in self.provider.Idea:
             self.provider.provider_name = "Idea"
+
         elif phone_no in self.provider.Reliance:
             self.provider.provider_name = "Reliance"
         else:
-            self.provider.provider_name = "Others"
+            self.provider.provider_name = "others"
 
-    def get_provider_name(self, phone_no):
+
+
+
+    def get_provider_name(self,phone_no):
         self.set_provider_name(phone_no)
         return self.provider.provider_name
+
+
+
 
 
 class Contacts:
@@ -221,11 +228,13 @@ class ContactManager:
         s = ProviderManager()
         if len(phone_no) == 10 and phone_no[0] != '0' and phone_no.isnumeric():
             print(s.get_provider_name(phone_no[0:4]))
+
         else:
             print('Phone number is not valid!')
 
     def get_contacts_by_provider(self):
         provider_name = input('Provider name:')
+
         records = cm.contacts.get_contacts_by_provider(provider_name)
         for item in records:
             print(cm.get_formatted_details(item))
@@ -244,7 +253,8 @@ class ContactManager:
         final_contact_list = {}
         for key, value in cm.contacts.contact_list.items():
             final_contact_list[key] = value.__dict__
-            final_contact_list[key][ContactDetails.ADDRESS] = final_contact_list[key][ContactDetails.ADDRESS].__dict__
+            final_contact_list[key][ContactDetails.ADDRESS] = \
+                final_contact_list[key][ContactDetails.ADDRESS].__dict__
         with open('contacts_data.json', 'w') as data_file:
             json.dump(final_contact_list, data_file)
 
