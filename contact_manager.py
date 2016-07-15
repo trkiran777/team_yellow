@@ -207,7 +207,7 @@ class ContactManager:
                     final_data[key] = value.__dict__
                     final_data[key]["address"] = final_data[key]["address"].__dict__
                 with open('contacts_data.json', 'w') as data_file:
-                    json.dump(final_data, data_file)
+                    json.dump(final_data, data_file, indent=2)
                 break
             else:
                 print('Unknown input')
