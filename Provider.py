@@ -1,37 +1,37 @@
 class Provider():
-    def __init__(self):
-        self.Airtel = ['9900', '9800', '9811']
-        self.BSNL = ['9440', '9822']
-        self.Idea = ['9848', '9912']
-        self.Reliance = ['9300', '9812']
-        self.provider_name = ""
+    def __init__(self, provider_name, phone_no):
+        self.provider_name = provider_name
+        self.phone_no = phone_no
+
 
 class ProviderManager():
-    def __init__(self):
-        self.provider = Provider()
-    def set_provider_name(self, phone_no, ):
-        if phone_no in self.provider.Airtel:
 
-            self.provider.provider_name = "Airtel"
-        elif phone_no in self.provider.BSNL:
-            self.provider.provider_name = "Bsnl"
+    Airtel = ['9900', '9800', '9811']
+    BSNL = ['9440', '9822']
+    Idea = ['9848', '9912']
+    Reliance = ['9300', '9812']
 
-        elif phone_no in self.provider.Idea:
-            self.provider.provider_name = "Idea"
+    def set_provider_name(self, phone_no):
+        if phone_no[0:4] in self.Airtel:
+            p = Provider("Airtel", phone_no)
+            return p
 
-        elif phone_no in self.provider.Reliance:
-            self.provider.provider_name = "Reliance"
+        elif phone_no[0:4] in self.BSNL:
+            p = Provider("BSNL", phone_no)
+            return p
+
+        elif phone_no[0:4] in self.Idea:
+            p = Provider("Idea", phone_no)
+            return p
+
+        elif phone_no in self.Reliance:
+            p = Provider("Reliance", phone_no)
+            return p
         else:
-            self.provider.provider_name = "others"
-
-
-
-
-
-    def get_provider_name(self,phone_no):
-        self.set_provider_name(phone_no)
-        return self.provider.provider_name
+            p = Provider("Others", phone_no)
+            return p
 
 
 c = ProviderManager()
-print(c.get_provider_name("9900"))
+p = c.set_provider_name("9440123456")
+print p.phone_no,p.provider_name
