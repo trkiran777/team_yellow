@@ -42,7 +42,7 @@ class ProviderManager():
     Airtel = ['9900', '9800', '9811']
     BSNL = ['9440', '9822']
     Idea = ['9848', '9912']
-    Reliance = ['9300', '9812']
+    Reliance = ['9300', '9812'] #
 
     def get_provider_name(self, phone_no):
         if phone_no[0:4] in self.Airtel:
