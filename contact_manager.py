@@ -15,8 +15,8 @@ class Address:
                    "pin_code": pin_code}
         return self.di
 
- 
- 
+
+
 class Contact:
     def __init__(self, name, phone_no, email, street, city, state, pin_code):
         self.name = name
@@ -45,39 +45,37 @@ class ContactDetails:
     STATE = 'state'
     PIN_CODE = 'pin_code'
 
- 
+
 class Provider():
-    def __init__(self, provider_name, phone_no):
+    def __init__(self, provider_name):
         self.provider_name = provider_name
-        self.phone_no = phone_no
+        self.series_list =[]
+    def add_series(self,series):
+        self.series_list.append(series)
 
 
 class ProviderManager():
-
-    Airtel = ['9900', '9800', '9811']
-    BSNL = ['9440', '9822']
-    Idea = ['9848', '9912']
-    Reliance = ['9300', '9812']
+    provider_list = []
+    provider = Provider("Airtel")
+    provider.add_series("9900")
+    provider.add_series("9800")
+    provider.add_series("9811")
+    provider_list.append(provider)
+    provider = Provider("BSNL")
+    provider.add_series("9440")
+    provider.add_series("9822")
+    provider_list.append(provider)
+    provider = Provider("Reliance")
+    provider.add_series("9300")
+    provider.add_series("9812")
+    provider_list.append(provider)
 
     def get_provider_name(self, phone_no):
-        if phone_no[0:4] in self.Airtel:
-            p = Provider("Airtel", phone_no)
-            return p
+        for provider in ProviderManager.provider_list:
+            if phone_no[0:4] in provider.series:
+                return provider.provider_name
+        return "Other"
 
-        elif phone_no[0:4] in self.BSNL:
-            p = Provider("BSNL", phone_no)
-            return p
-
-        elif phone_no[0:4] in self.Idea:
-            p = Provider("Idea", phone_no)
-            return p
-
-        elif phone_no in self.Reliance:
-            p = Provider("Reliance", phone_no)
-            return p
-        else:
-            p = Provider("Others", phone_no)
-            return p
 
 class Contacts:
     def __init__(self, contact_list):
