@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 {
   "1234567890": {
     "name": "fgdghj",
@@ -34,6 +33,4 @@
     "email": "bhanug@gmail.com"
   }
 }
-=======
-{"1234567890": {"phone_no": "1234567890", "name": "fgdghj", "address": {"street": "jlk", "city": "lkjl", "pin_code": "k", "state": "jk"}, "email": "jlkj"}, "9502810825": {"phone_no": "9502810825", "name": "Bhanu", "address": {"street": "JNTU", "city": "Hyderabad", "pin_code": "500072", "state": "Telangana"}, "email": "bhanug@gmail.com"}, "9900123456": {"phone_no": "9900123456", "name": "sdfa", "address": {"street": "dfgd", "city": "dfgg", "pin_code": "dfg", "state": "dfgdsf"}, "email": "dsfs"}, "9949942788": {"phone_no": "9949942788", "name": "Ravi kiran", "address": {"street": "Narsapuram", "city": "Visakhapatnam", "pin_code": "531055", "state": "Andhra pradesh"}, "email": "trkiran777@gmail.com"}}
->>>>>>> Stashed changes
+
