@@ -7,10 +7,16 @@ class Address:
         self.state = state
         self.pin_code = pin_code
 
-    def set_address(self, street, city, state, pin_code):
+    def set_street(self, street):
         self.street = street
+
+    def set_city(self, city):
         self.city = city
+
+    def set_state(self, state):
         self.state = state
+
+    def set_pin_code(self, pin_code):
         self.pin_code = pin_code
 
     def get_street(self):
@@ -33,11 +39,17 @@ class Contact:
         self.email = email
         self.address = Address(street, city, state, pin_code)
 
-    def set_contact(self, name, phone_no, email, street, city, state, pin_code):
+    def set_name(self, name):
         self.name = name
+
+    def set_phone_no(self, phone_no):
         self.phone_no = phone_no
+
+    def set_email(self, email):
         self.email = email
-        self.address.set_address(street, city, state, pin_code)
+
+    def set_address(self, address):
+        self.address = address
 
     def get_name(self):
         return self.name
