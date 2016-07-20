@@ -1,6 +1,5 @@
 import json
 
-
 class Address:
     def __init__(self, street, city, state, pin_code):
         self.street = street
@@ -64,35 +63,38 @@ class ContactDetails:
     PIN_CODE = 'pin_code'
 
 
-class Provider:
-    def __init__(self):
-        self.Airtel = ['9900', '9800', '9811']
-        self.BSNL = ['9440', '9822']
-        self.Idea = ['9848', '9912']
-        self.Reliance = ['9300', '9812']
-        self.provider_name = ""
+class Provider():
+    def __init__(self, provider_name, phone_no):
+        self.provider_name = provider_name
+        self.phone_no = phone_no
 
 
-class ProviderManager:
-    def __init__(self):
-        self.provider = Provider()
+class ProviderManager():
 
-    def set_provider_name(self, phone_no):
-        if phone_no in self.provider.Airtel:
-            self.provider.provider_name = "Airtel"
-        elif phone_no in self.provider.BSNL:
-            self.provider.provider_name = "BSNL"
-        elif phone_no in self.provider.Idea:
-            self.provider.provider_name = "Idea"
-        elif phone_no in self.provider.Reliance:
-            self.provider.provider_name = "Reliance"
-        else:
-            self.provider.provider_name = "Others"
+    Airtel = ['9900', '9800', '9811']
+    BSNL = ['9440', '9822']
+    Idea = ['9848', '9912']
+    Reliance = ['9300', '9812']
 
     def get_provider_name(self, phone_no):
-        self.set_provider_name(phone_no)
-        return self.provider.provider_name
+        if phone_no[0:4] in self.Airtel:
+            p = Provider("Airtel", phone_no)
+            return p
 
+        elif phone_no[0:4] in self.BSNL:
+            p = Provider("BSNL", phone_no)
+            return p
+
+        elif phone_no[0:4] in self.Idea:
+            p = Provider("Idea", phone_no)
+            return p
+
+        elif phone_no in self.Reliance:
+            p = Provider("Reliance", phone_no)
+            return p
+        else:
+            p = Provider("Others", phone_no)
+            return p
 
 class Contacts:
     def __init__(self, contact_list):
@@ -195,6 +197,7 @@ class ContactManager:
         else:
             return False
 
+
     def add_contact(self):
         name = input('Name:')
         phone_no = input('Phone:')
@@ -267,7 +270,7 @@ class ContactManager:
         s = ProviderManager()
         valid_phone_no = cm.is_valid_phone_no(phone_no)
         if valid_phone_no:
-            print(s.get_provider_name(phone_no[0:4]))
+            print((s.get_provider_name(phone_no[0:4])).provider_name)
         else:
             print('Phone number is not valid!')
 
