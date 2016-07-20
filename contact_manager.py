@@ -76,37 +76,36 @@ class ContactDetails:
 
 
 class Provider():
-    def __init__(self, provider_name, phone_no):
+    def __init__(self, provider_name):
         self.provider_name = provider_name
-        self.phone_no = phone_no
+        self.series_list =[]
+    def add_series(self,series):
+        self.series_list.append(series)
 
 
 class ProviderManager():
+    provider_list = []
+    provider = Provider("Airtel")
+    provider.add_series("9900")
+    provider.add_series("9800")
+    provider.add_series("9811")
+    provider_list.append(provider)
+    provider = Provider("BSNL")
+    provider.add_series("9440")
+    provider.add_series("9822")
+    provider_list.append(provider)
+    provider = Provider("Reliance")
+    provider.add_series("9300")
+    provider.add_series("9812")
+    provider_list.append(provider)
 
-    Airtel = ['9900', '9800', '9811']
-    BSNL = ['9440', '9822']
-    Idea = ['9848', '9912']
-    Reliance = ['9300', '9812']
+    @staticmethod
+    def get_provider_name(phone_no):
+        for provider in ProviderManager.provider_list:
+            if phone_no[0:4] in provider.series_list:
+                return provider.provider_name
+        return "Other"
 
-    def get_provider_name(self, phone_no):
-        if phone_no[0:4] in self.Airtel:
-            p = Provider("Airtel", phone_no)
-            return p
-
-        elif phone_no[0:4] in self.BSNL:
-            p = Provider("BSNL", phone_no)
-            return p
-
-        elif phone_no[0:4] in self.Idea:
-            p = Provider("Idea", phone_no)
-            return p
-
-        elif phone_no in self.Reliance:
-            p = Provider("Reliance", phone_no)
-            return p
-        else:
-            p = Provider("Others", phone_no)
-            return p
 
 class Contacts:
     def __init__(self, contact_list):
@@ -140,14 +139,12 @@ class Contacts:
         return self.contact_list[phone_no]
 
     def get_provider(self, phone_no):
-        ProviderManager.get_provider_name(phone_no[0:4])
+        return  ProviderManager.get_provider_name(phone_no[0:4])
 
     def get_contacts_by_provider(self, provider_name):
         li = []
-        p = Provider()
-        p = p.__dict__
         for phone, contact in self.contact_list.items():
-            if phone[0:4] in p[provider_name]:
+            if self.get_provider(phone) == provider_name:
                 li.append(contact)
         return li
 
@@ -279,10 +276,9 @@ class ContactManager:
 
     def get_provider(self):
         phone_no = input('Phone_no:')
-        s = ProviderManager()
         valid_phone_no = cm.is_valid_phone_no(phone_no)
         if valid_phone_no:
-            print((s.get_provider_name(phone_no[0:4])).provider_name)
+            print((ProviderManager.get_provider_name(phone_no[0:4])))
         else:
             print('Phone number is not valid!')
 
