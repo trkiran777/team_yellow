@@ -1,0 +1,36 @@
+{
+  "1234567890": {
+    "name": "fgdghj",
+    "phone_no": "1234567890",
+    "address": {
+      "pin_code": "k",
+      "city": "lkjl",
+      "street": "jlk",
+      "state": "jk"
+    },
+    "email": "jlkj"
+  },
+  "9949942788": {
+    "name": "Ravi kiran",
+    "phone_no": "9949942788",
+    "address": {
+      "pin_code": "531055",
+      "city": "Visakhapatnam",
+      "street": "Narsapuram",
+      "state": "Andhra pradesh"
+    },
+    "email": "trkiran777@gmail.com"
+  },
+  "9502810825": {
+    "name": "Bhanu",
+    "phone_no": "9502810825",
+    "address": {
+      "pin_code": "500072",
+      "city": "Hyderabad",
+      "street": "JNTU",
+      "state": "Telangana"
+    },
+    "email": "bhanug@gmail.com"
+  }
+}
+

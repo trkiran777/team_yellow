@@ -27,6 +27,30 @@ class Address:
         json["pin_code"] = self.pin_code
         return json
 
+    def set_street(self, street):
+        self.street = street
+
+    def set_city(self, city):
+        self.city = city
+
+    def set_state(self, state):
+        self.state = state
+
+    def set_pin_code(self, pin_code):
+        self.pin_code = pin_code
+
+    def get_street(self):
+        return self.street
+
+    def get_city(self):
+        return self.city
+
+    def get_state(self):
+        return self.state
+
+    def get_pin_code(self):
+        return self.pin_code
+
 
 class Contact:
     def __init__(self, name, phone_no, email, street, city, state, pin_code):
@@ -35,6 +59,30 @@ class Contact:
         self.email = email
         self.address = Address(street, city, state, pin_code)
 
+    def set_name(self, name):
+        self.name = name
+
+    def set_phone_no(self, phone_no):
+        self.phone_no = phone_no
+
+    def set_email(self, email):
+        self.email = email
+
+    def set_address(self, address):
+        self.address = address
+
+    def get_name(self):
+        return self.name
+
+    def get_phone_no(self):
+        return self.phone_no
+
+    def get_email(self):
+        return self.email
+
+    def get_address(self):
+        return self.address
+
     def get_json(self):
         json = {}
         json["name"] = self.name
@@ -42,6 +90,17 @@ class Contact:
         json["email"] = self.email
         json["address"] = self.address.get_json()
         return json
+
+
+class ContactDetails:
+    NAME = 'name'
+    PHONE_NO = 'phone_no'
+    EMAIL = 'email'
+    ADDRESS = 'address'
+    STREET = 'street'
+    CITY = 'city'
+    STATE = 'state'
+    PIN_CODE = 'pin_code'
 
 
 class Provider():
@@ -68,9 +127,10 @@ class ProviderManager():
     provider.add_series("9812")
     provider_list.append(provider)
 
-    def get_provider_name(self, phone_no):
+    @staticmethod
+    def get_provider_name(phone_no):
         for provider in ProviderManager.provider_list:
-            if phone_no[0:4] in provider.series:
+            if phone_no[0:4] in provider.series_list:
                 return provider.provider_name
         return "Other"
 
@@ -107,14 +167,12 @@ class Contacts:
         return self.contact_list[phone_no]
 
     def get_provider(self, phone_no):
-        ProviderManager.get_provider_name(phone_no[0:4])
+        return  ProviderManager.get_provider_name(phone_no[0:4])
 
     def get_contacts_by_provider(self, provider_name):
         li = []
-        p = Provider()
-        p = p.__dict__
         for phone, contact in self.contact_list.items():
-            if phone[0:4] in p[provider_name]:
+            if self.get_provider(phone) == provider_name:
                 li.append(contact)
         return li
 
@@ -142,17 +200,16 @@ class ContactManager:
     contact_list = {}
     contacts = Contacts(contact_list)
 
-    def get_contacts_from_json(self):
-        if os.path.isfile('contacts_data.json') and os.path.getsize('contacts_data.json') > 0:
-            with open('contacts_data.json') as data_file:
-                json_data = json.load(data_file)
-            for phone, contact in json_data.items():
-                ct = Contact(contact[ContactDetails.NAME], contact[ContactDetails.PHONE_NO], contact[ContactDetails.EMAIL],
-                             contact[ContactDetails.ADDRESS][ContactDetails.STREET],
-                             contact[ContactDetails.ADDRESS][ContactDetails.CITY],
-                             contact[ContactDetails.ADDRESS][ContactDetails.STATE],
-                             contact[ContactDetails.ADDRESS][ContactDetails.PIN_CODE])
-                cm.contact_list[phone] = ct
+    def load_contacts_from_file(self):
+        with open('contacts_data.json') as data_file:
+            json_data = json.load(data_file)
+        for phone, contact in json_data.items():
+            ct = Contact(contact[ContactDetails.NAME], contact[ContactDetails.PHONE_NO], contact[ContactDetails.EMAIL],
+                         contact[ContactDetails.ADDRESS][ContactDetails.STREET],
+                         contact[ContactDetails.ADDRESS][ContactDetails.CITY],
+                         contact[ContactDetails.ADDRESS][ContactDetails.STATE],
+                         contact[ContactDetails.ADDRESS][ContactDetails.PIN_CODE])
+            cm.contact_list[phone] = ct
         cm.contacts = Contacts(cm.contact_list)
 
     def get_formatted_details(self, details):
@@ -186,13 +243,13 @@ class ContactManager:
         city = input('City:')
         state = input('State:')
         pin_code = input('Pin_code:')
-        contact_exist = cm.is_contact_exist(phone_no)
+        is_contact_exist = cm.is_contact_exist(phone_no)
         valid_phone_no = cm.is_valid_phone_no(phone_no)
-        if (not contact_exist) and valid_phone_no:
+        if (not is_contact_exist) and valid_phone_no:
             contact = Contact(name, phone_no, email, street, city, state, pin_code)
             cm.contacts.add_contact(contact)
-
-        elif contact_exist:
+            print('Contact successfully added!')
+        elif is_contact_exist:
             print('Phone number already exists.Do you want to\n'
                   '1: Modify the existing contact\n'
                   '2: Do not add this contact')
@@ -208,11 +265,12 @@ class ContactManager:
             print('Phone number is not valid...Please check it.')
 
     def modify_contact(self):
+        cm.get_contact()
         fields = [ContactDetails.NAME, ContactDetails.PHONE_NO, ContactDetails.EMAIL, ContactDetails.STREET,
                   ContactDetails.CITY, ContactDetails.STATE, ContactDetails.PIN_CODE]
         phone_no = input('Enter Phone_no:')
-        contact_exist = cm.is_contact_exist(phone_no)
-        if contact_exist:
+        is_contact_exist = cm.is_contact_exist(phone_no)
+        if is_contact_exist:
             n = int(input('Enter no. of fields to change:'))
             d = {}
             for i in range(n):
@@ -228,8 +286,8 @@ class ContactManager:
 
     def delete_contact(self):
         phone_no = input('Phone_no:')
-        contact_exist = cm.is_contact_exist(phone_no)
-        if contact_exist:
+        is_contact_exist = cm.is_contact_exist(phone_no)
+        if is_contact_exist:
             cm.contacts.delete_contact(phone_no)
             print('Contact deleted')
         else:
@@ -237,8 +295,8 @@ class ContactManager:
 
     def get_contact(self):
         phone_no = input('Phone_no:')
-        contact_exist = cm.is_contact_exist(phone_no)
-        if contact_exist:
+        is_contact_exist = cm.is_contact_exist(phone_no)
+        if is_contact_exist:
             details = cm.contacts.get_contact(phone_no)
             print(cm.get_formatted_details(details))
         else:
@@ -246,10 +304,9 @@ class ContactManager:
 
     def get_provider(self):
         phone_no = input('Phone_no:')
-        s = ProviderManager()
         valid_phone_no = cm.is_valid_phone_no(phone_no)
         if valid_phone_no:
-            print((s.get_provider_name(phone_no[0:4])).provider_name)
+            print((ProviderManager.get_provider_name(phone_no[0:4])))
         else:
             print('Phone number is not valid!')
 
@@ -268,18 +325,20 @@ class ContactManager:
             li = cm.contacts.get_contacts_by_field(st, field)
             for item in li:
                 print(cm.get_formatted_details(item))
+        else:
+            print('There is no such field!')
 
-    def add_contact_list_to_json(self):
+    def save_contact_to_file((self):
         final_contact_list = {}
 
         for key, value in cm.contacts.contact_list.items():
             final_contact_list[key] = value.get_json()
 
-        with open('contacts_data1.json', 'w') as data_file:
+        with open('contacts_data.json', 'w') as data_file:
             json.dump(final_contact_list, data_file)
 
     def main(self):
-        cm.get_contacts_from_json()
+        cm.load_contacts_from_file()
         print('1: ADD_PERSON, 2: MODIFY_PERSON, 3: DELETE_PERSON, 4: DISPLAY_DETAILS, 5: DISPLAY_PROVIDER,'
               ' 6: DISPLAY_RECORDS_OF_PROVIDER, 7: DISPLAY_RECORDS_CONTAINING_STRING, 8:EXIT')
         while True:
@@ -300,7 +359,7 @@ class ContactManager:
             elif ip == '7':
                 cm.get_contacts_by_field()
             elif ip == '8':
-                cm.add_contact_list_to_json()
+                cm.save_contact_to_file()
                 break
             else:
                 print('Unknown input')
