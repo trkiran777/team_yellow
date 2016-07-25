@@ -1,4 +1,5 @@
 import json
+import os
 
 class Address:
     def __init__(self, street, city, state, pin_code):
@@ -6,6 +7,14 @@ class Address:
         self.city = city
         self.state = state
         self.pin_code = pin_code
+
+    def get_json(self):
+        json = {}
+        json["street"] = self.street
+        json["city"] = self.city
+        json["state"] = self.city
+        json["pin_code"] = self.pin_code
+        return json
 
     def set_street(self, street):
         self.street = street
@@ -39,6 +48,14 @@ class Contact:
         self.email = email
         self.address = Address(street, city, state, pin_code)
 
+    def get_json(self):
+        json = {}
+        json["name"] = self.name
+        json["phone_no"] = self.phone_no
+        json["email"] = self.email
+        json["address"] = self.address.get_json()
+        return json
+
     def set_name(self, name):
         self.name = name
 
@@ -62,6 +79,8 @@ class Contact:
 
     def get_address(self):
         return self.address
+
+
 
 
 class ContactDetails:
@@ -173,8 +192,9 @@ class ContactManager:
     contacts = Contacts(contact_list)
 
     def load_contacts_from_file(self):
-        with open('contacts_data.json') as data_file:
-            json_data = json.load(data_file)
+        if os.path.isfile('contacts_data.json') and os.path.getsize('contacts_data.json') > 0:
+            with open('contacts_data.json') as data_file:
+                json_data = json.load(data_file)
         for phone, contact in json_data.items():
             ct = Contact(contact[ContactDetails.NAME], contact[ContactDetails.PHONE_NO], contact[ContactDetails.EMAIL],
                          contact[ContactDetails.ADDRESS][ContactDetails.STREET],
@@ -302,12 +322,12 @@ class ContactManager:
 
     def save_contact_to_file(self):
         final_contact_list = {}
-        for phone, contact in cm.contacts.contact_list.items():
-            final_contact_list[phone] = contact.__dict__
-            final_contact_list[phone][ContactDetails.ADDRESS] = final_contact_list[phone][
-                ContactDetails.ADDRESS].__dict__
+
+        for key, value in cm.contacts.contact_list.items():
+            final_contact_list[key] = value.get_json()
+
         with open('contacts_data.json', 'w') as data_file:
-            json.dump(final_contact_list, data_file, indent=2)
+            json.dump(final_contact_list, data_file)
 
     def main(self):
         cm.load_contacts_from_file()
