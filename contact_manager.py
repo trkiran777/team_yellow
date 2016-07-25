@@ -1,17 +1,6 @@
 import json
 import os
 
-class ContactDetails:
-    NAME = 'name'
-    PHONE_NO = 'phone_no'
-    EMAIL = 'email'
-    ADDRESS = 'address'
-    STREET = 'street'
-    CITY = 'city'
-    STATE = 'state'
-    PIN_CODE = 'pin_code'
-
-
 class Address:
     def __init__(self, street, city, state, pin_code):
         self.street = street
@@ -59,6 +48,14 @@ class Contact:
         self.email = email
         self.address = Address(street, city, state, pin_code)
 
+    def get_json(self):
+        json = {}
+        json["name"] = self.name
+        json["phone_no"] = self.phone_no
+        json["email"] = self.email
+        json["address"] = self.address.get_json()
+        return json
+
     def set_name(self, name):
         self.name = name
 
@@ -83,13 +80,7 @@ class Contact:
     def get_address(self):
         return self.address
 
-    def get_json(self):
-        json = {}
-        json["name"] = self.name
-        json["phone_no"] = self.phone_no
-        json["email"] = self.email
-        json["address"] = self.address.get_json()
-        return json
+
 
 
 class ContactDetails:
@@ -201,8 +192,9 @@ class ContactManager:
     contacts = Contacts(contact_list)
 
     def load_contacts_from_file(self):
-        with open('contacts_data.json') as data_file:
-            json_data = json.load(data_file)
+        if os.path.isfile('contacts_data.json') and os.path.getsize('contacts_data.json') > 0:
+            with open('contacts_data.json') as data_file:
+                json_data = json.load(data_file)
         for phone, contact in json_data.items():
             ct = Contact(contact[ContactDetails.NAME], contact[ContactDetails.PHONE_NO], contact[ContactDetails.EMAIL],
                          contact[ContactDetails.ADDRESS][ContactDetails.STREET],
@@ -328,7 +320,7 @@ class ContactManager:
         else:
             print('There is no such field!')
 
-    def save_contact_to_file((self):
+    def save_contact_to_file(self):
         final_contact_list = {}
 
         for key, value in cm.contacts.contact_list.items():
