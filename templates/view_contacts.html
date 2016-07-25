@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Contacts</title>
+    <link rel="stylesheet" href="/static/view_contacts.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <h1>Telephone Directory</h1>
+    </header>
+    <div>
+        <h1>List of Contacts</h1>
+        <table  id="width" class="table table-hover" border="2">
+            <tr>
+                <th>Name</th>
+                <th>Phone No.</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Pin-code</th>
+            </tr>
+            {% for contact in contacts %}
+            <tr>
+                <td> {{contact.name}} </td>
+                <td> {{contact.phone_no}} </td>
+                <td> {{contact.email}} </td>
+                <td> {{contact.address.street}} </td>
+                <td> {{contact.address.city}} </td>
+                <td> {{contact.address.state}} </td>
+                <td> {{contact.address.pin_code}} </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <form action="/contacts_home">
+            <button class="btn btn-primary" type="submit">Home</button>
+        </form>
+    </div>
+    <footer><h4>Copyrights@TeamYellow</h4></footer>
+</body>
+</html>

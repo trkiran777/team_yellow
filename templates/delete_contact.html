@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Contact</title>
+    <link rel="stylesheet" href="/static/delete_contact.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <h1>Telephone Directory</h1>
+    </header>
+    <div>
+        <h1>Delete Contact</h1>
+        <form action="/delete_contact" method="post">
+            <p>Phone No: <input type="text" name="phone_no"/></p>
+            <p><input class="btn btn-primary" type="submit" value="Submit"/></p>
+            {% if message %}
+                <h4 style="color:red;">{{ message }}</h4>
+            {% endif %}
+        </form>
+        <a class="btn btn-primary"  href="/contacts_home">Home</a>
+    </div>
+    <footer><h4>Copyrights@TeamYellow</h4></footer>
+</body>
+</html>

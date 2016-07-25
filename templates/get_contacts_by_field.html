@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Contacts by String</title>
+    <link rel="stylesheet" href="/static/get_contacts_by_field.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <h1>Telephone Directory</h1>
+    </header>
+    <div>
+        <h1>Get contacts by String</h1>
+        <form action="/get_contacts_by_field" method="post">
+            <p>Enter string: <input type="text" name="string"/></p>
+            <select id="select" class="btn btn-default dropdown-toggle" name="field">
+                <option value="" disabled="disabled" selected="selected">Select Field</option>
+                <option value="name">NAME</option>
+                <option value="phone_no">PHONE_NO</option>
+                <option value="email">EMAIL</option>
+                <option value="street">STREET</option>
+                <option value="city">CITY</option>
+                <option value="state">STATE</option>
+                <option value="pin_code">PIN_CODE</option>
+            </select>
+            <input class="btn btn-primary" type="submit" value="Submit"/>
+        </form>
+        <a class="btn btn-primary"  href="/contacts_home">Home</a>
+    </div>
+    <footer><h4>Copyrights@TeamYellow</h4></footer>
+</body>
+</html>
