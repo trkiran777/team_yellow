@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get Contacts by Provider</title>
+    <link rel="stylesheet" href="/static/get_contacts_by_provider.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <h1>Telephone Directory</h1>
+    </header>
+    <div>
+        <h1>Get contacts by Provider</h1>
+        <form action="/get_contacts_by_provider" method="post">
+            <select class="btn btn-default dropdown-toggle" name="provider">
+                <option value="" disabled="disabled" selected="selected">Select Provider</option>
+                <option value="Airtel">Airtel</option>
+                <option value="BSNL">BSNL</option>
+                <option value="Idea">Idea</option>
+                <option value="Reliance">Reliance</option>
+            </select>
+            <input class="btn btn-primary" type="submit" value="Submit"/>
+        </form>
+        <a class="btn btn-primary"  href="/contacts_home">Home</a>
+    </div>
+    <footer><h4>Copyrights@TeamYellow</h4></footer>
+</body>
+</html>
