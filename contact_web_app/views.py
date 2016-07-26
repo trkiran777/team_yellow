@@ -1,7 +1,6 @@
 from flask import render_template, request
-from contacts import Contact, ContactDetails, Contacts
 from contact_web_app import app
-from contact_web_app.contacts import Contact, ContactDetails, Contacts, Loaddata
+from contact_web_app.contacts import Contact, Contacts, Loaddata
 
 data = Loaddata()
 contact_list = data.get_data_from_jsonfile()
