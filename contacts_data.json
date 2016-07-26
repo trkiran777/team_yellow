@@ -1,35 +1,24 @@
 {
-  "9900123654": {
-    "name": "Sri hari",
-    "phone_no": "9900123654",
-    "email": "srihari@gmail.com",
+  "8332990701": {
+    "phone_no": "8332990701", 
     "address": {
-      "state": "Telangana",
-      "street": "Kukatpally",
-      "city": "Hyderabad",
-      "pin_code": "500035"
-    }
-  },
-  "9949942788": {
-    "name": "Ravi kiran",
-    "phone_no": "9949942788",
-    "email": "trkiran777@gmail.com",
+      "city": "cba", 
+      "state": "cba", 
+      "street": "abc", 
+      "pin_code": "123456"
+    }, 
+    "name": "sanjay", 
+    "email": "sanjayhcu01@gmail.com"
+  }, 
+  "8332990711": {
+    "phone_no": "8332990711", 
     "address": {
-      "state": "Andhra pradesh",
-      "street": "Narsapuram",
-      "city": "Visakhapatnam",
-      "pin_code": "531055"
-    }
-  },
-  "9800124578": {
-    "name": "Sanjay",
-    "phone_no": "9800124578",
-    "email": "sanjay@gmail.com",
-    "address": {
-      "state": "Telangana",
-      "street": "Gachibowli",
-      "city": "Hyderabad",
-      "pin_code": "500031"
-    }
+      "city": "cba", 
+      "state": "cba", 
+      "street": "abc", 
+      "pin_code": "123456"
+    }, 
+    "name": "sanjay sharma", 
+    "email": "sanjayhcu01@gmail.com"
   }
 }
