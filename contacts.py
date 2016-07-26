@@ -148,7 +148,6 @@ class Contacts:
                 self.contact_list[phone_no].name = fields[field]
             elif field == ContactDetails.PHONE_NO:
                 self.contact_list[phone_no].phone_no = fields[field]
-                self.contact_list[fields[field]] = self.contact_list.pop[phone_no]
             elif field == ContactDetails.EMAIL:
                 self.contact_list[phone_no].email = fields[field]
             elif field == ContactDetails.STREET:

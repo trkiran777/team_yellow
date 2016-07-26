@@ -1,36 +1,35 @@
 {
-  "1234567890": {
-    "name": "fgdghj",
-    "phone_no": "1234567890",
+  "9900123654": {
+    "name": "Sri hari",
+    "phone_no": "9900123654",
+    "email": "srihari@gmail.com",
     "address": {
-      "pin_code": "k",
-      "city": "lkjl",
-      "street": "jlk",
-      "state": "jk"
-    },
-    "email": "jlkj"
+      "state": "Telangana",
+      "street": "Kukatpally",
+      "city": "Hyderabad",
+      "pin_code": "500035"
+    }
   },
   "9949942788": {
     "name": "Ravi kiran",
     "phone_no": "9949942788",
+    "email": "trkiran777@gmail.com",
     "address": {
-      "pin_code": "531055",
-      "city": "Visakhapatnam",
+      "state": "Andhra pradesh",
       "street": "Narsapuram",
-      "state": "Andhra pradesh"
-    },
-    "email": "trkiran777@gmail.com"
+      "city": "Visakhapatnam",
+      "pin_code": "531055"
+    }
   },
-  "9502810825": {
-    "name": "Bhanu",
-    "phone_no": "9502810825",
+  "9800124578": {
+    "name": "Sanjay",
+    "phone_no": "9800124578",
+    "email": "sanjay@gmail.com",
     "address": {
-      "pin_code": "500072",
+      "state": "Telangana",
+      "street": "Gachibowli",
       "city": "Hyderabad",
-      "street": "JNTU",
-      "state": "Telangana"
-    },
-    "email": "bhanug@gmail.com"
+      "pin_code": "500031"
+    }
   }
 }
-
