@@ -329,3 +329,34 @@ class ContactManager:
         with open('contacts_data.json', 'w') as data_file:
             json.dump(final_contact_list, data_file)
 
+    def main(self):
+        cm.load_contacts_from_file()
+        print('1: ADD_PERSON, 2: MODIFY_PERSON, 3: DELETE_PERSON, 4: DISPLAY_DETAILS, 5: DISPLAY_PROVIDER,'
+              ' 6: DISPLAY_RECORDS_OF_PROVIDER, 7: DISPLAY_RECORDS_CONTAINING_STRING, 8:EXIT')
+        while True:
+            print('Enter your command:')
+            ip = input()
+            if ip == '1':
+                cm.add_contact()
+            elif ip == '2':
+                cm.modify_contact()
+            elif ip == '3':
+                cm.delete_contact()
+            elif ip == '4':
+                cm.get_contact()
+            elif ip == '5':
+                cm.get_provider()
+            elif ip == '6':
+                cm.get_contacts_by_provider()
+            elif ip == '7':
+                cm.get_contacts_by_field()
+            elif ip == '8':
+                cm.save_contact_to_file()
+                break
+            else:
+                print('Unknown input')
+
+
+if __name__ == '__main__':
+    cm = ContactManager()
+    cm.main()
