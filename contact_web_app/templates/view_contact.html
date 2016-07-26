@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Details</title>
+    <link rel="stylesheet" href="/static/view_contact.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+    <header>
+        <h1>Telephone Directory</h1>
+    </header>
+    <div>
+        <h1>Contact Details</h1>
+        <form action="/modify_contact_form" method="get">
+            <p>Name: <input id="ip1" type="text" name="name" value="{{contact.name}}" readonly/></p>
+            <p>Phone No: <input id="ip2" type="text" name="phone_no" value="{{contact.phone_no}}" readonly/></p>
+            <p>Email: <input id="ip3" type="text" name="email" value="{{contact.email}}" readonly/></p>
+            <p>Street: <input id="ip4" type="text" name="street" value="{{contact.address.street}}" readonly/></p>
+            <p>City: <input id="ip5" type="text" name="city" value="{{contact.address.city}}" readonly/></p>
+            <p>State: <input id="ip6" type="text" name="state" value="{{contact.address.state}}" readonly/></p>
+            <p>Pin-code: <input id="ip7" type="number" name="pin_code" value="{{contact.address.pin_code}}" readonly/></p>
+            <p><input id="ip8" class="btn btn-primary" type="submit" value="Modify Contact"/></p>
+        </form>
+        <a class="btn btn-primary"  href="/contacts_home">Home</a>
+    </div>
+    <footer><h4>Copyrights@TeamYellow</h4></footer>
+</body>
+</html>

@@ -1,9 +1,8 @@
 import json
 import os
+from flask import render_template, request
 from contacts import Contact, ContactDetails, Contacts
-from flask import Flask, render_template, request
-
-app = Flask(__name__)
+from contact_web_app import app
 
 
 contact_list = {}
@@ -176,7 +175,3 @@ def save_contacts_to_file():
     with open('contacts_data.json', 'w') as data_file:
         json.dump(final_contact_list, data_file, indent=2)
     return render_template('exit.html')
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
