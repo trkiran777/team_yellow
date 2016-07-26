@@ -1,9 +1,9 @@
 import json
 import os
-from flask import render_template, request
-from contacts import Contact, ContactDetails, Contacts
-from contact_web_app import app
 
+from flask import render_template, request
+from contact_web_app import app
+from contact_web_app.contacts import Contact, ContactDetails, Contacts
 
 contact_list = {}
 contacts = Contacts(contact_list)
@@ -50,6 +50,7 @@ def add_contact():
         if (not is_contact_exist) and is_valid_phone_no:
             contact = Contact(name, phone_no, email, street, city, state, pin_code)
             contacts.add_contact(contact)
+            contacts.save_contacts_to_file()
             message = 'Contact successfully added!'
             return render_template('add_contact.html', message=message)
         elif is_contact_exist:
@@ -74,6 +75,7 @@ def modify_contact():
         if is_contact_exist:
             fields = request.form
             contacts.modify_contact(phone_no, fields)
+            contacts.save_contacts_to_file()
             message = 'Contact successfully modified!'
             return render_template('modify_contact.html', message=message)
         else:
@@ -94,6 +96,7 @@ def delete_contact():
         is_contact_exist = contacts.is_contact_exist(phone_no)
         if is_contact_exist:
             contacts.delete_contact(phone_no)
+            contacts.save_contacts_to_file()
             message = 'Contact deleted successfully!'
             return render_template('delete_contact.html', message=message)
         else:
@@ -164,14 +167,3 @@ def get_contacts_by_field():
         field = request.form['field']
         li = contacts.get_contacts_by_field(string, field)
         return render_template('view_contacts.html', contacts=li)
-
-
-@app.route('/save_contacts_to_file')
-def save_contacts_to_file():
-    final_contact_list = {}
-    for key, value in contacts.contact_list.items():
-        final_contact_list[key] = value.get_json()
-        final_contact_list[key][ContactDetails.ADDRESS] = final_contact_list[key][ContactDetails.ADDRESS].__dict__
-    with open('contacts_data.json', 'w') as data_file:
-        json.dump(final_contact_list, data_file, indent=2)
-    return render_template('exit.html')

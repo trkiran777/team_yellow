@@ -1,3 +1,6 @@
+import json
+
+
 class Address:
     def __init__(self, street, city, state, pin_code):
         self.street = street
@@ -138,6 +141,13 @@ class Contacts:
             return True
         else:
             return False
+
+    def save_contacts_to_file(self):
+        final_contact_list = {}
+        for key, value in self.contact_list.items():
+            final_contact_list[key] = value.get_json()
+        with open('contacts_data.json', 'w') as data_file:
+            json.dump(final_contact_list, data_file, indent=2)
 
     def add_contact(self, contact):
         self.contact_list[contact.phone_no] = contact
