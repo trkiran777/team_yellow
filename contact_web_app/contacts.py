@@ -1,3 +1,5 @@
+import os
+import json
 class Address:
     def __init__(self, street, city, state, pin_code):
         self.street = street
@@ -194,3 +196,17 @@ class Contacts:
             elif field == ContactDetails.PIN_CODE and st in contact.address.pin_code:
                 li.append(contact)
         return li
+class Loaddata():
+    def get_data_from_jsonfile(self):
+        contact_list = {}
+        if os.path.isfile('contacts_data.json') and os.path.getsize('contacts_data.json') > 0:
+            with open('contacts_data.json') as data_file:
+                json_data = json.load(data_file)
+            for key, value in json_data.items():
+                ct = Contact(value[ContactDetails.NAME], value[ContactDetails.PHONE_NO], value[ContactDetails.EMAIL],
+                             value[ContactDetails.ADDRESS][ContactDetails.STREET],
+                             value[ContactDetails.ADDRESS][ContactDetails.CITY],
+                             value[ContactDetails.ADDRESS][ContactDetails.STATE],
+                             value[ContactDetails.ADDRESS][ContactDetails.PIN_CODE])
+                contact_list[key] = ct
+            return contact_list

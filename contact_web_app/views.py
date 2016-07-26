@@ -1,26 +1,21 @@
 import json
 import os
+
 from flask import render_template, request
-from contacts import Contact, ContactDetails, Contacts
+
 from contact_web_app import app
+from contact_web_app.contacts import Contact, ContactDetails, Contacts,Loaddata
 
+data = Loaddata()
 
-contact_list = {}
+contact_list = data.get_data_from_jsonfile()
 contacts = Contacts(contact_list)
+
 
 
 @app.route('/')
 def load_contacts_from_file():
-    if os.path.isfile('contacts_data.json') and os.path.getsize('contacts_data.json') > 0:
-        with open('contacts_data.json') as data_file:
-            json_data = json.load(data_file)
-        for key, value in json_data.items():
-            ct = Contact(value[ContactDetails.NAME], value[ContactDetails.PHONE_NO], value[ContactDetails.EMAIL],
-                         value[ContactDetails.ADDRESS][ContactDetails.STREET],
-                         value[ContactDetails.ADDRESS][ContactDetails.CITY],
-                         value[ContactDetails.ADDRESS][ContactDetails.STATE],
-                         value[ContactDetails.ADDRESS][ContactDetails.PIN_CODE])
-            contact_list[key] = ct
+
     return render_template('contacts_home.html')
 
 
@@ -171,7 +166,7 @@ def save_contacts_to_file():
     final_contact_list = {}
     for key, value in contacts.contact_list.items():
         final_contact_list[key] = value.get_json()
-        final_contact_list[key][ContactDetails.ADDRESS] = final_contact_list[key][ContactDetails.ADDRESS].__dict__
+
     with open('contacts_data.json', 'w') as data_file:
         json.dump(final_contact_list, data_file, indent=2)
     return render_template('exit.html')
