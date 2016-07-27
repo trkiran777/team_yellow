@@ -8,11 +8,6 @@ contacts = Contacts(contact_list)
 
 
 @app.route('/')
-def load_contacts_from_file():
-    return render_template('contacts_home.html')
-
-
-@app.route('/contacts_home')
 def contacts_home():
     return render_template('contacts_home.html')
 

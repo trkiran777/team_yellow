@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="/static/normalize.css"/>
+    <link rel="stylesheet" href="/static/foundation.css"/>
     <link rel="stylesheet" href="/static/contacts_home.css"/>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
     <header>
@@ -13,22 +14,22 @@
     <div>
         <h1>Menu:</h1>
         <form action="/add_contact_form">
-            <input id="ip1" class="btn btn-primary" type="submit" value="ADD CONTACT"/>
+            <input class="button small" type="submit" value="ADD CONTACT"/>
         </form>
         <form action="/delete_contact_form">
-            <input class="btn btn-primary" type="submit" value="DELETE CONTACT"/>
+            <input class="button small" type="submit" value="DELETE CONTACT"/>
         </form>
         <form action="/get_contact_form">
-            <input class="btn btn-primary" type="submit" value="GET CONTACT"/>
+            <input class="button small" type="submit" value="GET CONTACT"/>
         </form>
         <form action="/get_provider_form">
-            <input class="btn btn-primary" type="submit" value="GET PROVIDER"/>
+            <input class="button small" type="submit" value="GET PROVIDER"/>
         </form>
         <form action="/get_contacts_by_provider_form">
-            <input class="btn btn-primary" type="submit" value="GET CONTACTS BY PROVIDER"/>
+            <input class="button small" type="submit" value="GET CONTACTS BY PROVIDER"/>
         </form>
         <form action="/get_contacts_by_field_form">
-            <input class="btn btn-primary" type="submit" value="GET CONTACTS BY FIELD"/>
+            <input class="button small" type="submit" value="GET CONTACTS BY FIELD"/>
         </form>
     </div>
     <footer><h4>Copyrights@TeamYellow</h4></footer>

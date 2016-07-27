@@ -4,45 +4,23 @@ body{
 header{
     background: #ADDA90 url("http://www.clker.com/cliparts/N/d/2/R/F/r/phone-book-hi.png") no-repeat center;
     background-size: 150px 100px;
-    margin: -20px 0px -20px 0px;
+    margin: -5px 0px -20px 0px;
     padding: 0px 0px 135px 0px;
 }
 div{
-    padding: 0px 0px 159px 0px;
+    padding: 10px 0px 0px 0px;
 }
 form{
     background: #ADD8E6;
     border: 1px solid black;
     margin: 0px 640px 40px 640px;
-    padding: 10px 0px 0px 0px;
     border-radius: 50px 50px 50px 50px;
     box-shadow: 10px 10px 10px;
 }
-p{
-    padding: 5px 0px 5px 0px;
-}
-#ip1{
-    margin: 0px 2px 0px 21px;
-}
-#ip3{
-    margin: 0px 2px 0px 26px;
-}
-#ip4{
-    margin: 0px 2px 0px 29px;
-}
-#ip5{
-    margin: 0px 2px 0px 38px;
-}
-#ip6{
-    margin: 0px 2px 0px 37px;
-}
-#ip7{
-    margin: 0px 7px 0px 9px;
-}
-#ip8{
+#btn1{
     margin: 0px -40px 0px 45px;
 }
-#ip9{
+#btn2{
     margin: 0px 0px 0px 50px;
 }
 footer{
